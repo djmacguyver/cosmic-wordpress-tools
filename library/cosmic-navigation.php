@@ -97,13 +97,12 @@ example:
 
 if (  !function_exists('getCosmicACFMenu'))
 { 
-	function getCosmicACFMenu($mode='echo',$ul=1)
+	function getCosmicACFMenu($mode='echo')
 	{
 	  
 	  $IDs=getPlaceHolderPageIds();
 	  
-	  if($ul==1)
-	  	$nav='<ul>';
+	  $nav='<ul>';
 	  
 	  $nav.= wp_list_pages("title_li=&echo=0&exclude=".getDontShowInNavIds()."");
 	  $nav=str_replace("children","dropdown",$nav); 
@@ -120,8 +119,7 @@ if (  !function_exists('getCosmicACFMenu'))
 		$nav=preg_replace($regex, $replace, $nav,1); 
 	  }
 	  
-	  if($ul==1)
-	  	$nav.='</ul>';
+	  $nav.='</ul>';
 	  
 	  if($mode=='echo')
 	  	echo $nav;

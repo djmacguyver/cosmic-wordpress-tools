@@ -17,7 +17,7 @@
 example:
 
 <link rel="stylesheet" type="text/css" href="<?php bloginfo("template_directory"); ?>/assets/css/flexslider.css" media="screen" />
-<div class="home-fullwide-bar-wrapper nopad" id="home-flexslider-wrapper">
+<div class=" nopad" id="home-flexslider-wrapper">
   <div class="flexslider" style="margin:0 auto;">
     <ul class="slides">
       <?php echo homeSliders( 'home_sliders', 5, '1000', '404'); ?>
@@ -31,10 +31,13 @@ example:
 if ( !function_exists('homeSliders') ) 
 {
 	
-	function homeSliders( $name='',$id=0, $w='1000', $h='404')
+	function homeSliders( $name='',$id=0, $w='1600', $h='440')
 	{
 	
-		$html='';
+		$html='<link rel="stylesheet" type="text/css" href="'.get_bloginfo("template_directory").'/assets/css/flexslider.css" media="screen" />
+		<div class=" nopad" id="home-flexslider-wrapper">
+		<div class="flexslider" style="margin:0 auto;">
+		<ul class="slides">';
 		
 		if( get_field($name,$id) )
 		{
@@ -47,11 +50,27 @@ if ( !function_exists('homeSliders') )
 			  <div class="flex-caption">
 			  <div>
 			  <h3>'.get_sub_field('title',$id).'</h3>
-			  <p>'.get_sub_field('desc',$id).'</p>
 			  </div>
 			  </div>
 			  </li>';
 			}
+			
+			$html.='</ul>
+			<div class="clear"></div>
+			</div>
+			</div>
+			<script type="text/javascript">
+			jQuery(document).ready(function($){
+			
+			jQuery(\'.flexslider\').flexslider({
+			animation: "fade",
+			pauseOnHover: true,
+			start: function(slider){}
+			});
+			
+			});
+			</script>';
+			
 		} 
 		
 		return $html;
